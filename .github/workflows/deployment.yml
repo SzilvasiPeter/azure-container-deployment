@@ -6,6 +6,7 @@ on:
 
 env:
   LOGIN_SERVER: rustrocketwebservice.azurecr.io
+  IMAGE_NAME: rocket-webserver-rs
   VERSION: v0.0.1
 
 jobs:
@@ -24,5 +25,5 @@ jobs:
 
       - name: Build and push docker image
         run: |
-          docker build . -t ${{ env.LOGIN_SERVER }}/rocket-webserver-rs:${{ env.VERSION }}
-          docker push ${{ env.LOGIN_SERVER }}/rocket-webserver-rs:${{ env.VERSION }}
+          docker build . -t ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          docker push ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
