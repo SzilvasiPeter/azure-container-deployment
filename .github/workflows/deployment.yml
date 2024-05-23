@@ -11,7 +11,7 @@ jobs:
       - uses: azure/docker-login@v2
         with:
           login-server: rustrocketwebservice.azurecr.io
-          username: ${{ secrets.ACR_USERNAME }}
+          username: rustrocketwebservice
           password: ${{ secrets.ACR_PASSWORD }}
 
       - run: |
