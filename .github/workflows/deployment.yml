@@ -1,0 +1,22 @@
+name: Azure Docker Container Deployment
+
+on:
+  push:
+    branches: [ "main" ]
+
+env:
+  LOGIN_SERVER: rustrocketwebservice.azurecr.io
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: azure/docker-login@v2
+        with:
+          login-server: ${{ env.LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
+      - run: |
+          docker build . -t ${{ env.LOGIN_SERVER }}/rocket-webserver-rs:${{ github.sha }}
+          docker push ${{ env.LOGIN_SERVER }}/rocket-webserver-rs:${{ github.sha }}
