@@ -1,6 +1,6 @@
 # TODO
 
 - [x] containerize the application
-- [ ] create ACR
+- [x] create ACR
 - [ ] build/push to ACR with github workflow
 - [ ] deploy the ACI/ACA
