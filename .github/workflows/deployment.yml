@@ -8,12 +8,17 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: azure/docker-login@v2
+      - name: Login to Azure container registry
+        uses: azure/docker-login@v2
         with:
           login-server: rustrocketwebservice.azurecr.io
           username: rustrocketwebservice
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - run: |
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3.3.0
+
+      - name: Build and push docker image
+        run: |
           docker build . -t rustrocketwebservice.azurecr.io/rocket-webserver-rs:${{ github.sha }}
           docker push rustrocketwebservice.azurecr.io/rocket-webserver-rs:${{ github.sha }}
