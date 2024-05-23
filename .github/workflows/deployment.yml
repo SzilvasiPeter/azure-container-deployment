@@ -4,14 +4,17 @@ on:
   push:
     branches: [ "main" ]
 
+env:
+  LOGIN_SERVER: rustrocketwebservice.azurecr.io
+
 jobs:
-  build-and-deploy:
+  build-and-push-image:
     runs-on: ubuntu-latest
     steps:
       - name: Login to Azure container registry
         uses: azure/docker-login@v2
         with:
-          login-server: rustrocketwebservice.azurecr.io
+          login-server: ${{ env.LOGIN_SERVER }}
           username: rustrocketwebservice
           password: ${{ secrets.ACR_PASSWORD }}
 
@@ -20,5 +23,5 @@ jobs:
 
       - name: Build and push docker image
         run: |
-          docker build . -t rustrocketwebservice.azurecr.io/rocket-webserver-rs:${{ github.sha }}
-          docker push rustrocketwebservice.azurecr.io/rocket-webserver-rs:${{ github.sha }}
+          docker build . -t ${{ env.LOGIN_SERVER }}/rocket-webserver-rs:${{ github.sha }}
+          docker push ${{ env.LOGIN_SERVER }}/rocket-webserver-rs:${{ github.sha }}
