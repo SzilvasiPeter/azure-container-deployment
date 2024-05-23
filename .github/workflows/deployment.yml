@@ -7,7 +7,7 @@ on:
 env:
   LOGIN_SERVER: rustrocketwebservice.azurecr.io
   IMAGE_NAME: rocket-webserver-rs
-  VERSION: v0.0.1
+  VERSION: v0.0.2
 
 jobs:
   build-and-push-image:

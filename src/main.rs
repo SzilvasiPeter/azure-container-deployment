@@ -1,6 +1,8 @@
 #[macro_use]
 extern crate rocket;
 
+use std::fs;
+
 #[get("/")]
 fn hello() -> &'static str {
     "Hello, world!"
@@ -20,9 +22,16 @@ fn fibonnaci(nth: u8) -> String {
     return format!("The {}nth fibonnaci: {}", nth, sum);
 }
 
+#[get("/")]
+fn write() {
+    let data = "Some data!";
+    fs::write("/tmp/foo", data).expect("Unable to write file");
+}
+
 #[launch]
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![hello])
         .mount("/fib", routes![fibonnaci])
+        .mount("/write", routes![write])
 }
