@@ -6,5 +6,10 @@
 - [x] create API to write a file
 - [x] deploy the ACI
 - [ ] attach volume to ACI
-- [ ] add SSL using Caddy or Nginx (or using virtual network approach)
+- [ ] retrieve environment variables, specified under ACI
+- [ ] add SSL using Caddy/Nginx (or using virtual network approach with function proxy, api management, app. gateway)
 - [ ] deploy the ACA
+
+# References
+
+https://learn.microsoft.com/en-us/azure/container-instances/container-instances-github-action
