@@ -12,5 +12,5 @@ WORKDIR /app
 COPY --from=build /app/target/release/azure-container-deployment ./
 
 ENV ROCKET_ADDRESS=0.0.0.0
-ENV ROCKET_PORT=80
+ENV ROCKET_PORT=8000
 CMD ["./azure-container-deployment"]

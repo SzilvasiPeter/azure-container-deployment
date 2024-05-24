@@ -13,6 +13,14 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 'Login via Azure CLI'
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Login to Azure Container Registry
         uses: azure/docker-login@v2
         with:
@@ -20,16 +28,13 @@ jobs:
           username: ${{ secrets.ACR_USERNAME }}
           password: ${{ secrets.ACR_PASSWORD }}
 
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
       - name: Build and Push Docker Image
         run: |
           docker build . -t ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           docker push ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
 
       - name: Deploy to Azure Container Instances
-        uses: azure/aci-deploy@v1.1.3
+        uses: azure/aci-deploy@v1
         with:
           resource-group: container-rg
           dns-name-label: rocket-webserver-dns-name
