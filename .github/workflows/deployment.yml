@@ -41,6 +41,7 @@ jobs:
           cpu: 1
           memory: 1
           restart-policy: OnFailure
+          ports: 8000
           image: ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           registry-username: ${{ secrets.ACR_USERNAME }}
           registry-password: ${{ secrets.ACR_PASSWORD }}
