@@ -42,4 +42,4 @@ jobs:
           registry-username: ${{ secrets.ACR_USERNAME }}
           registry-password: ${{ secrets.ACR_PASSWORD }}
           name: rocket-webserver-container-instance
-          location: north eu
+          location: northeurope
