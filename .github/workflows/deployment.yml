@@ -2,7 +2,7 @@ name: Azure Docker Container Deployment
 
 on:
   push:
-    branches: [ "main" ]
+    branches: main
 
 env:
   LOGIN_SERVER: rustrocketwebservice.azurecr.io
@@ -16,7 +16,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: 'Login via Azure CLI'
+      - name: Login via Azure CLI
         uses: azure/login@v2
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
@@ -38,6 +38,9 @@ jobs:
         with:
           resource-group: container-rg
           dns-name-label: rocket-webserver-dns-name
+          cpu: 1
+          memory: 1
+          restart-policy: OnFailure
           image: ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           registry-username: ${{ secrets.ACR_USERNAME }}
           registry-password: ${{ secrets.ACR_PASSWORD }}
