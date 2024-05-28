@@ -1,5 +1,8 @@
 name: Azure Docker Container Deployment
 
+on:
+  workflow_dispatch:
+
 env:
   LOGIN_SERVER: rustrocketwebservice.azurecr.io
   IMAGE_NAME: rocket-webserver-rs
