@@ -33,7 +33,8 @@ fn write() {
 fn environment() -> String {
     let user = env::var("USER").unwrap_or_default();
     let password = env::var("PASSWORD").unwrap_or_default();
-    return format!("The {} user has the {} password", user, password);
+    let secret = env::var("SECRET").unwrap_or_default();
+    return format!("The {} user has the {} password. The secret is '{}'", user, password, secret);
 }
 
 #[launch]
