@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  ACR_NAME: rustrocketwebservice
+  LOGIN_SERVER: rustrocketwebservice.azurecr.io
   IMAGE_NAME: rocket-webserver-rs
   VERSION: v0.0.6
 
@@ -22,15 +22,19 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Login to Azure Container Registry
+        uses: azure/docker-login@v2
+        with:
+          login-server: ${{ env.LOGIN_SERVER }}
+          username: ${{ secrets.ACR_USERNAME }}
+          password: ${{ secrets.ACR_PASSWORD }}
+
       - name: Build and Deploy Azure Container App
         uses: azure/container-apps-deploy-action@v2
         with:
           appSourcePath: ${{ github.workspace }}
           resourceGroup: container-rg
-          acrName: ${{ env.ACR_NAME }}
-          acrUsername: ${{ secrets.ACR_USERNAME }}
-          acrPassword: ${{ secrets.ACR_PASSWORD }}
-          imageToBuild: ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
-          containerAppName: rocket-webservice-container-app
+          imageToBuild: ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           containerAppEnvironment: container-apps-environment-consumption-only
+          containerAppName: rocket-webservice-container-app
           environmentVariables: USER=my_user PASSWORD=my_password
