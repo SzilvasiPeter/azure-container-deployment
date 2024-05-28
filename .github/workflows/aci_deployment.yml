@@ -1,9 +1,5 @@
 name: Azure Docker Container Deployment
 
-on:
-  push:
-    branches: main
-
 env:
   LOGIN_SERVER: rustrocketwebservice.azurecr.io
   IMAGE_NAME: rocket-webserver-rs
