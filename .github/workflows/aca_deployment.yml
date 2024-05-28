@@ -38,4 +38,4 @@ jobs:
           imageToBuild: ${{ env.LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
           containerAppEnvironment: container-apps-environment-consumption-only
           containerAppName: rocket-webservice-container-app
-          environmentVariables: USER=my_user PASSWORD=my_password SECRET=secretref:SECRET_TEST
+          environmentVariables: USER=my_user PASSWORD=my_password SECRET=secretref:secret-from-container-app
