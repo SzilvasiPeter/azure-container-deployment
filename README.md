@@ -5,11 +5,13 @@
 - [x] build/push to ACR with github workflow
 - [x] create API to write a file
 - [x] deploy the ACI
-- [ ] attach volume to ACI
-- [ ] retrieve environment variables, specified under ACI
-- [ ] add SSL using Caddy/Nginx (or using virtual network approach with function proxy, api management, app. gateway)
-- [ ] deploy the ACA
+- [x] deploy the ACA
+- [x] attach volume to ACA
+- [x] retrieve environment variables, specified under ACA
+- [ ] deploy using github workflow
 
 # References
 
-https://learn.microsoft.com/en-us/azure/container-instances/container-instances-github-action
+ACI github workflow: https://learn.microsoft.com/en-us/azure/container-instances/container-instances-github-action
+Mount Options: https://learn.microsoft.com/en-us/troubleshoot/azure/azure-kubernetes/storage/mountoptions-settings-azure-files
+ACA github workflow: https://learn.microsoft.com/en-us/azure/container-apps/github-actions

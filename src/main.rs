@@ -2,10 +2,11 @@
 extern crate rocket;
 
 use std::fs;
+use std::env;
 
 #[get("/")]
 fn hello() -> &'static str {
-    "Hello, world!"
+    return "Hello, world!"
 }
 
 #[get("/<nth>")]
@@ -28,10 +29,18 @@ fn write() {
     fs::write("/tmp/foo", data).expect("Unable to write file");
 }
 
+#[get("/")]
+fn environment() -> String {
+    let user = env::var("USER").unwrap_or_default();
+    let password = env::var("PASSWORD").unwrap_or_default();
+    return format!("The {} user has the {} password", user, password);
+}
+
 #[launch]
 fn rocket() -> _ {
     rocket::build()
         .mount("/", routes![hello])
         .mount("/fib", routes![fibonnaci])
         .mount("/write", routes![write])
+        .mount("/env", routes![environment])
 }
