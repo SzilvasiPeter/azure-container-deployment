@@ -1,0 +1,32 @@
+name: Azure Container Apps Deployment
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  ACR_NAME: rustrocketwebservice
+  IMAGE_NAME: rocket-webserver-rs
+  VERSION: v0.0.6
+
+jobs:
+  build-and-deploy-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Deploy Azure Container App
+        uses: azure/container-apps-deploy-action@v2
+        with:
+          appSourcePath: ${{ github.workspace }}
+          resourceGroup: container-rg
+          acrName: ${{ env.ACR_NAME }}
+          acrUsername: ${{ secrets.ACR_USERNAME }}
+          acrPassword: ${{ secrets.ACR_PASSWORD }}
+          azureCredentials: ${{ secrets.AZURE_CREDENTIALS }}
+          imageToBuild: ${{ env.ACR_NAME }}.azurecr.io/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          containerAppName: rocket-webservice-container-app
+          containerAppEnvironment: container-apps-environment-consumption-only
+          environmentVariables: USER=my_user PASSWORD=my_password
