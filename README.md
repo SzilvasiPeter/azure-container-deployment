@@ -6,6 +6,10 @@ I have chosen the Azure Container Apps (ACA) over the Azure Container Instance (
 - It provides ingress for the application out of the box in order to configure the secure connection.
 - It is also possible to create scheduled tasks using **Container App Job** resource.
 
+## Architecture Diagram
+
+![architecture](architecture_diagram.png)
+
 # Prerequisites
 
 You need to have the following resources in Azure:
